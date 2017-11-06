@@ -22,6 +22,6 @@ average numlist = sum(numlist)/fromIntegral(length(numlist))
 			sum (x:xs) = x + sum(xs)
 
 --2.8b
-rep 0 = [0]
-rep n = 
+rep 0 = []
+rep n = [ [x]  | x <- [1..n]] 
 
