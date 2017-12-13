@@ -59,8 +59,23 @@ average numlist = sum(numlist)/fromIntegral(length(numlist))
 			sum (x:xs) = x + sum(xs)
 --2.6b
 midelem c =  
-	(head (drop (div ((length c) - 1)  2)  c)) 
+	(head (drop (div ((length c) - 1)  2)  c))
 
+--2.7a
+--[ (x,y) | x <- [1..2], y <- [2..5], (x+y) /= 4] 
+--Above result = [(1,2),(1,4),(1,5),(2,3),(2,4),(2,5)]
+--[x | x <- [1..10] , (x `mod` 2 ) == 0]
+--Above Result = [2,4,6,8,10]
+
+
+--2.7b
+--[x | x <- [1..15]]
+--[if (x `mod` 2) == 0 then x else (x*(-1)) | x <- [2..11] ]
+--[x * (-1)^x | x <- [2..11] ]
+
+--2.8a
+neg c =
+	length([ x | x <- c , x < 0])
 
 
 --2.8b
@@ -87,15 +102,31 @@ string2int c
 	| (length(c) > 0) = ((charToInt((head c)) * (10 ^ ((fromIntegral((length c))) - 1)))) + (string2int(tail c))
 	| otherwise = 0
 
+--2.10
+--map fst [(1,2),(3,8),(0,6),(3,1)]
+--result: [1,3,0,3]
+--z x y = (x+y) `div` 2 (foldr z 0 l, foldl z 0 l) where l = [6,9,8,3,10] 
+--result: (6, 7)
+--foldr (++) [] [ [1,2,3],[4,5,6],[], [7]]
+--result: [1,2,3,4,5,6,7]
+
 
 
 --2.11
 compose f g x = f (g x) 
 -- The type is polymorphic and is (a -> b) -> (c -> a) -> c -> b 
 
+--2.12a
+--array (1,4) [(1,11),(2,20),(3,36),(4,47)]
+--2.12b
+--array (1,15) [(x,x) | x <- [1..15] ]
+--2.12c
+--array (1,10) [(x-1, (if (x `mod` 2) == 0 then x else (x*(-1)))) | x <- [2..11] ]
+--array (1,10) [(x-1, (x * (-1)^x) | x <- [2..11] ]
+--the number is equal to n n * (-1)^nth power would get negative for odd and positive for even 
 
-
-
+--2.13
+--array ((1,1) (3,3)) [((y,x), z) | x <-[1..3], y <-[1..3], z<-[2..10]]
 
 --2.15
 -- The types are the following
