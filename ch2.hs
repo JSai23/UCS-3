@@ -125,8 +125,36 @@ compose f g x = f (g x)
 --array (1,10) [(x-1, (x * (-1)^x) | x <- [2..11] ]
 --the number is equal to n n * (-1)^nth power would get negative for odd and positive for even 
 
---2.13
---array ((1,1) (3,3)) [((y,x), z) | x <-[1..3], y <-[1..3], z<-[2..10]]
+--2.13a
+myarray1 = array ((1,1), (3,3)) [((1,1),2), ((1,2),3), ((1,3),4), ((2,1),5), ((2,2),6), ((2,3),7), ((3,1),8), ((3,2),9), ((3,3),10)]
+--2.13b
+myarray2 = array ((1,1), (3,3)) [((x,y), ((((x-2)*3)+4)+y)) | x <-[1..3], y <-[1..3]]
+--2.13c
+transpose x = 
+	x//[((1,2),num2), ((2,1),num1), ((1,3),num4), ((3,1), num3), ((2,3), num6), ((3,2),num5)] where
+	num1 = x!(1,2)
+	num2 = x!(2,1)
+	num3 = x!(1,3)
+	num4 = x!(3,1)
+	num5 = x!(2,3)
+	num6 = x!(3,2)
+--2.13d
+transposeall a =array (bounds a) [((y,x), a!(x,y))| x<-[1..num1], y<-[1..num2]] where
+			num1= fst(snd(bounds a))
+			num2= snd(snd(bounds a))
+
+--2.14
+cube x = x * x * x
+--Num a => a -> a
+maxi x y | x >=y = x
+	 | otherwise = y 
+--Ord a => a -> a -> a
+sumAtoB a b = sum [a..b]
+--(Num a, Enum a) => a -> a -> a
+
+	
+
+	
 
 --2.15
 -- The types are the following
