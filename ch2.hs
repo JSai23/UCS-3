@@ -6,7 +6,7 @@ import Array
 --2.1 
 -- (1+2) -> 3
 -- if (2>9) then "Hello" else "Bye" -> "Bye" 
--- let x = (sqrt 16) in (x+1) -> 5
+-- let x = (sqrt 16) in (x+1) -> 5.0
 
 
 --2.2a
@@ -29,10 +29,9 @@ fact'' n = if n < 0 then -1
 -- 1:2:3 you cant cons numbers onto numbers
 -- actual solution [1, 2, 3]
 
--- [ [2,3]++[] , [2,3]:[] ] brackets cant enclose a tuple
--- actual solution ([2,3]++[] , [2,3]:[])
-
--- "hello":"world" can't use cons with strings
+-- [ [2,3]++[] , [2,3]:[] ] cant have a list with one list and one list of lists
+-- actual solution [[2,3]++[] , [2,3]++[]]
+-- "hello":"world" can't cons different datatype a string is a list of characters so u cant cons a string into a string u can only cons characters into a string but u can append a string into a string because ur consing a list of characters into a list of characters 
 -- actual solution "hello" ++ "world" 
 
 --2.4
@@ -53,7 +52,7 @@ f l = reverse (f' l [])
 
 --2.6a
 average [] = 0
-average numlist = sum(numlist)/fromIntegral(length(numlist))
+average numlist = sum(numlist)/fromIntegral(length(numlist)) --don't need sum, sum is predefined 
 		  where
 			sum []= 0
 			sum (x:xs) = x + sum(xs)
@@ -69,9 +68,9 @@ midelem c =
 
 
 --2.7b
---[x | x <- [1..15]]
---[if (x `mod` 2) == 0 then x else (x*(-1)) | x <- [2..11] ]
---[x * (-1)^x | x <- [2..11] ]
+--[x | x <- [1..15], x /= 9]
+--[if (x `mod` 2) == 0 then x else (x*(-1)) | x <- [2..11] ] - first way to solve second one
+--[x * (-1)^x | x <- [2..11] ] - more efficient mathematical way to solve second one 
 
 --2.8a
 neg c =
@@ -119,7 +118,7 @@ compose f g x = f (g x)
 --2.12a
 --array (1,4) [(1,11),(2,20),(3,36),(4,47)]
 --2.12b
---array (1,15) [(x,x) | x <- [1..15] ]
+--array (1,14) [(x, (if (x>=9) then x+1 else x)) | x <- [1..14] ] 
 --2.12c
 --array (1,10) [(x-1, (if (x `mod` 2) == 0 then x else (x*(-1)))) | x <- [2..11] ]
 --array (1,10) [(x-1, (x * (-1)^x) | x <- [2..11] ]
@@ -130,7 +129,7 @@ myarray1 = array ((1,1), (3,3)) [((1,1),2), ((1,2),3), ((1,3),4), ((2,1),5), ((2
 --2.13b
 myarray2 = array ((1,1), (3,3)) [((x,y), ((((x-2)*3)+4)+y)) | x <-[1..3], y <-[1..3]]
 --2.13c
-transpose x = 
+transpose3 x = 
 	x//[((1,2),num2), ((2,1),num1), ((1,3),num4), ((3,1), num3), ((2,3), num6), ((3,2),num5)] where
 	num1 = x!(1,2)
 	num2 = x!(2,1)
