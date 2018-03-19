@@ -39,3 +39,6 @@ power x k = if (k ==0)
 --13    |25
 --14    |25
 --15    |26
+--
+--
+--both are O(log n) in big O notation 
