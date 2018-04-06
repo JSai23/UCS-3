@@ -76,8 +76,10 @@ prodsumtu x =  z+y where (z,y) = tuplemaker(x)
 tuplemaker x = (prodh x, sumh x)
 -- new definition of prodsum without tuples tail recursive 
 prodsumtr 0 = 0 
-prodsumtr x = prodh x + sumh x 
+prodsumtr x = prodsumtr' x 0 1
 
+prodsumtr' 0 sumacc prodacc = sumacc + prodacc
+prodsumtr' n sumacc prodacc = prodsumtr' (n-1) (sumacc + n) (prodacc * n) 
 
 
 
