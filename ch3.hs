@@ -42,3 +42,42 @@ power x k = if (k ==0)
 --
 --
 --both are O(log n) in big O notation 
+
+--3.3
+--get from computer in boca i left it there by accident
+
+--3.4
+--original
+prodsumo x = prodo x + sumo x
+
+prodo 0 = 1
+prodo n = n * prodo(n-1)
+
+sumo 0 = 0 
+sumo n = n + sumo(n-1)
+
+--new definitions of sum and prod that r tail recursive 
+prodh 0 = 1
+prodh n = prod' n 1
+
+prod' 0 result = result
+prod' n result = prod' (n-1) (result *n)
+
+sumh 0 = 1
+sumh n = sum' n 0
+
+sum' 0 result = result
+sum' n result = sum' (n-1) (result + n)
+
+--new definition of prodsum with tuples (i made it tail recursive)
+prodsumtu 0 = 0
+prodsumtu x =  z+y where (z,y) = tuplemaker(x)
+
+tuplemaker x = (prodh x, sumh x)
+-- new definition of prodsum without tuples tail recursive 
+prodsumtr 0 = 0 
+prodsumtr x = prodh x + sumh x 
+
+
+
+
