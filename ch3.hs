@@ -44,7 +44,21 @@ power x k = if (k ==0)
 --both are O(log n) in big O notation 
 
 --3.3
---get from computer in boca i left it there by accident
+--im doing this assuming there is storage 
+--a. lazy list
+--length: n steps O(n)
+--sum: mn + n O(mn)
+--head: 1 O(1)
+--
+--b. tails evaluate
+--length:m(n-1)+n O(mn)
+--sum: mn + n O(mn) 
+--head:O(1)
+
+--c. tails and heads evaluated
+--length: mn + n O(mn)
+--sum: mn+n O(mn)
+--head: O(n)
 
 --3.4
 --original
