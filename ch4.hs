@@ -9,8 +9,13 @@ concat2 xs = foldl (++) [] xs
 --original 
 comp f g l = [f x | x <- (map g l ), x > 10] 
 -- new one pass (check with Dr.Ken)  
-comp f g [] = []
---comp f g l = 
+comp' f g [] = []
+comp' f g l = comphelp f g l [] 
+
+comphelp f g [] acc = reverse acc 
+comphelp f g l acc  
+  | (g (head l)) > 10 = comphelp f g (tail l) ((f (g (head l))) : acc)
+  | otherwise = comphelp f g (tail l) acc
 --4.3
 --
 --original 
@@ -19,7 +24,7 @@ split x l = ([y | y <- l, y <=x], [y| y <- l, y > x])
 split' x [] = ([],[])
 split' x l = splithelp x l [] [] 
 
-splithelp x [] lessacc moreacc = (lessacc, moreacc) 
+splithelp x [] lessacc moreacc = (reverse(lessacc), reverse(moreacc)) 
 splithelp x l lessacc moreacc = if head(l) <= x 
 		then splithelp x (tail(l)) ((head(l)) : lessacc) moreacc 
 		else splithelp x (tail(l)) lessacc ((head(l)) : moreacc)
