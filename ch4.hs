@@ -56,6 +56,7 @@ flipT (Leaf'' a) = Leaf'' a
 
 a3 = Leaf'' 3
 a4 = NodeBT'' (Leaf'' 1) (Leaf'' 2)
+a5 = NodeBT'' (NodeBT'' (Leaf'' 1) (Leaf'' 2))  (NodeBT'' (Leaf'' 3) (Leaf'' 4))
 
 --ff reverses the whole tree
-ff' (NodeBT'' a b) = (NodeBT'' b a)
+ff' (NodeBT'' a b) = (NodeBT'' a b)
