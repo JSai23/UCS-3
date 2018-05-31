@@ -1,4 +1,4 @@
-module USet (USet(..),emptySet,setEmpty,inUSet,addUSet,delUSet,inSet) where
+module USet (USet(..),emptySet,setEmpty,inUSet,addUSet,delUSet,inSet,included,inter,union) where
 	--emptySet :: USet a
 	--setEmpty :: USet a -> Bool
 	--inUSet    :: (Eq a) => a -> USet a -> Bool
@@ -22,6 +22,10 @@ delUSet x (USt xs) = USt (filter (/= x) xs)
 
 --5.3
 inSet (USt xs) x = [] /= [ a |  a <- xs , a == x] 
---included is NOT DONE
-included (USt s1) (USt s2) = [     | a <- s1 , b <- s2]
+
+included (USt s1) (USt s2) = [ a | a <- s1 , b <- s2, a == b] == s1
+
+inter (USt s1) (USt s2) = USt [ a | a <- s1 , b <- s2, a == b] 
+
+union (USt s1) (USt s2) =  [a | a <- s2, not(inSet a (USt s1))] ++ s1
 
