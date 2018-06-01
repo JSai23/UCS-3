@@ -1,6 +1,7 @@
 --5.1
 import PQueue
 import USet
+import OSet
 data Point a = Pt (a,a) 
 	deriving Show
 dist (Pt (a,b)) = sqrt((a^2) + (b^2))
@@ -19,7 +20,11 @@ test1 = PQ[]
 --in the PQueue.hs file = enPQ'
 
 --5.3
+--all in USet.hs file
 test2 = USt[1,2,3,4,5]
-test3 = USt[6,7,6,8,5]
+test3 = USt[7,6,8,5,4,3,2,1]
+
+--5.4
+
 
 

@@ -27,5 +27,5 @@ included (USt s1) (USt s2) = [ a | a <- s1 , b <- s2, a == b] == s1
 
 inter (USt s1) (USt s2) = USt [ a | a <- s1 , b <- s2, a == b] 
 
-union (USt s1) (USt s2) =  [a | a <- s2, not(inSet a (USt s1))] ++ s1
+union (USt s1) (USt s2) =  USt ([a | a <- s2, not(inUSet a (USt s1))] ++ s1)
 
