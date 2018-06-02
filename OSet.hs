@@ -1,4 +1,4 @@
-module OSet (OSet(..),emptySet,setEmpty,inOSet,addOSet,delOSet,inter') where
+module OSet (OSet(..),emptySet,setEmpty,inOSet,addOSet,delOSet,inter',union') where
 	--emptySet :: OSet a
 	--setEmpty :: OSet a -> Bool
 	--inOSet    :: (Eq a) => a -> OSet a -> Bool
@@ -18,7 +18,7 @@ inOSet x (OSt s) = elem x (takeWhile (<= x) s)
 addOSet x (OSt s) = OSt (add x s) 
    where add x [] = [x]
          add x s@(y:ys) | (x>y)     = y : (add x ys) 
-                        | (x<y)     = s
+                        | (x<y)     = x : s
                         | otherwise = s
 				   
 delOSet x (OSt s) = OSt (del x s) 
@@ -26,26 +26,17 @@ delOSet x (OSt s) = OSt (del x s)
          del x s@(y:ys) | (x>y) = y : (del x ys)
                         | (x<y) = s
                         | otherwise = ys
-						
---5.4 wrong way
-{-
-inter' (OSt []) _                                   = [] 
-inter' _ (OSt [])                                   = [] 
-inter' (OSt (x:[])) (OSt s2)    |ine x s2           = [x]
-                                |otherwise          = []
-inter' (OSt (x:xs)) (OSt s2)    |ine x s2           = x : inter' (OSt xs) (OSt s2)
-
-ine _ []                     = False
-ine a (x:xs)   |a == x       = True
-               |a > x        = ine a xs
-			   |otherwise    = False 	
--}
 			   
---trying the right answer simplify both list at the same time -- output is still wrong is list needs to be ost
-inter' (OSt []) (OSt []) = [] 
-inter' (OSt []) _  = []
-inter' _ (OSt [])  = []
-inter' (OSt xt@(x:xs)) (OSt yt@(y:ys)) |x == y    = x : inter' (OSt xs) (OSt ys) --error is because of x: set
+--5.4
+inter' (OSt []) (OSt []) = (OSt []) 
+inter' (OSt []) _  = (OSt []) 
+inter' _ (OSt [])  = (OSt []) 
+inter' (OSt xt@(x:xs)) (OSt yt@(y:ys)) |x == y    =  addOSet x (inter' (OSt xs) (OSt ys))
                                        |x < y     = inter' (OSt xs) (OSt yt)
 								       |otherwise = inter' (OSt xt) (OSt ys) 
+							
+union'(OSt []) (OSt [])        = (OSt []) 
+union' (OSt []) (OSt ys)       = (OSt ys)
+union' (OSt xs) (OSt [])       = (OSt xs) 
+union' (OSt xs) (OSt (y:ys))   = union' (addOSet y (OSt xs)) (OSt ys)
 			   

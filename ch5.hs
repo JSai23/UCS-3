@@ -2,6 +2,7 @@
 import PQueue
 import USet
 import OSet
+import MSet
 data Point a = Pt (a,a) 
 	deriving Show
 dist (Pt (a,b)) = sqrt((a^2) + (b^2))
@@ -25,7 +26,12 @@ test2 = USt[1,2,3,4,5]
 test3 = USt[7,6,8,5,4,3,2,1]
 
 --5.4
-test4 = OSt[2,3,4,5,6]
+test4 = OSt[2,3,5,6]
 test5 = OSt[2,3,4]
+
+--5.5
+test6 = MSt [1,2,3,4,5]
+
+--5.6
 
 
