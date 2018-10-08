@@ -1,25 +1,25 @@
-import Array
 module TTable(TTable(..), newTTable, findTTable, updTTable, inTTable) where 
+import Array
 		
 data TTable a b = TTbl (Array b a)
 	deriving Show
 
-newTTable l        = TTbl (array (lo,hi) l)
-	where indices  = map fst l 
-          lo       = minimum indices
-		  hi       = maximum indices 
+newTTable l     = TTbl (array (lo,hi) l)
+    where indices      = map fst l 
+          lo           = minimum indices
+	  hi           = maximum indices 
 
-findTTable (Tbl a) i = a ! i 
+findTTable (TTbl a) i = a ! i 
 
-updTable p@(i,x) (Tbl a) = Tbl (a // [p]) 
+updTable p@(i,x) (TTbl a) = Tbl (a // [p]) 
 
 --not done
-inTTable p@(i,x) (Tbl a) |not (i >= minfirst)   = False
+inTTable p@(i,x) (TTbl a) |not (i >= minfirst)   = False
                          |not (i <= maxfirst)   = False
                          |not (x >= minsecond)  = False
-						 |not (x <= maxsecond)  = False
-						 |otherwise             = True 
-    where tbounds       = bounds a
+			 |not (x <= maxsecond)  = False
+			 |otherwise             = True 
+   	    where tbounds       = bounds a
 		  minbounds     = fst tbounds
 		  maxbounds     = snd tbounds
 		  minfirst      = fst minbounds
@@ -27,5 +27,12 @@ inTTable p@(i,x) (Tbl a) |not (i >= minfirst)   = False
 		  maxfirst      = fst maxbounds
 		  maxsecond     = snd maxbounds
 
+rows (TTbl a) = (fst (snd (bounds a))) - (fst (fst (bounds a)))
+
+columns (TTbl a) = (snd (snd (bounds a))) - (snd (fst (bounds a)))
+
+row num (TTbl a) = [a!(a,i) | i <- [0,columns(a)]]
+
+col num (TTbl a) = [a!(i,a) | i <- [0,rows(a)]]
 
 		  
