@@ -1,4 +1,4 @@
-module TTable(TTable(..), newTTable, findTTable, updTTable, inTTable) where 
+module TTable(TTable(..), newTTable, findTTable, inTTable) where 
 import Array
 		
 data TTable a b = TTbl (Array b a)
@@ -11,7 +11,7 @@ newTTable l     = TTbl (array (lo,hi) l)
 
 findTTable (TTbl a) i = a ! i 
 
-updTable p@(i,x) (TTbl a) = Tbl (a // [p]) 
+updTable p@(i,x) (TTbl a) = TTbl (a // [p]) 
 
 --not done
 inTTable p@(i,x) (TTbl a) |not (i >= minfirst)   = False
@@ -31,8 +31,8 @@ rows (TTbl a) = (fst (snd (bounds a))) - (fst (fst (bounds a)))
 
 columns (TTbl a) = (snd (snd (bounds a))) - (snd (fst (bounds a)))
 
-row num (TTbl a) = [a!(a,i) | i <- [0,columns(a)]]
+row num (TTbl a) = [a!(a,i) | i <- [0,columns(TTbl a)]]
 
-col num (TTbl a) = [a!(i,a) | i <- [0,rows(a)]]
+col num (TTbl a) = [a!(i,a) | i <- [0,rows(TTbl a)]]
 
 		  
