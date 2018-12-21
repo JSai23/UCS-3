@@ -4,6 +4,7 @@ import USet
 import OSet
 import MSet
 import TTable
+import Array
 
 data Point a = Pt (a,a) 
 	deriving Show
@@ -35,6 +36,7 @@ test5 = OSt[2,3,4]
 test6 = MSt [1,2,3,4,5]
 
 --5.6
-test7 = TTbl[((0,0),1),((0,1),2),((0,2),3),((1,0),4),((1,1),5),((1,3),6)]
+x = array (((0),(0)),((1),(1))) [(((0),(0)),(1)),(((0),(1)),(2)), (((1),(0)),(1)), (((1),(1)),(2))]
+test7 = TTbl(x)
 
 

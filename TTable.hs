@@ -1,4 +1,4 @@
-module TTable(TTable(..), newTTable, findTTable, inTTable) where 
+module TTable(TTable(..), newTTable, findTTable, inTTable, rows, columns, row, col) where 
 import Array
 		
 data TTable a b = TTbl (Array b a)
@@ -31,8 +31,8 @@ rows (TTbl a) = (fst (snd (bounds a))) - (fst (fst (bounds a)))
 
 columns (TTbl a) = (snd (snd (bounds a))) - (snd (fst (bounds a)))
 
-row num (TTbl a) = [a!(a,i) | i <- [0,columns(TTbl a)]]
+row num (TTbl a) = [a!(num,i) | i <- [0..columns(TTbl a)]]
 
-col num (TTbl a) = [a!(i,a) | i <- [0,rows(TTbl a)]]
+col num (TTbl a) = [a!(i,num) | i <- [0..rows(TTbl a)]]
 
 		  
