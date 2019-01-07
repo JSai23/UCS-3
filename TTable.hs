@@ -1,4 +1,4 @@
-module TTable(TTable(..), newTTable, findTTable, inTTable, rows, columns, row, col) where 
+module TTable(TTable(..), newTTable, findTTable, inTTable, rows, columns, row, col, matMult) where 
 import Array
 		
 data TTable a b = TTbl (Array b a)
@@ -27,12 +27,16 @@ inTTable p@(i,x) (TTbl a) |not (i >= minfirst)   = False
 		  maxfirst      = fst maxbounds
 		  maxsecond     = snd maxbounds
 
-rows (TTbl a) = (fst (snd (bounds a))) - (fst (fst (bounds a)))
+rows (TTbl a) = (fst (snd (bounds a))) - (fst (fst (bounds a))) 
 
 columns (TTbl a) = (snd (snd (bounds a))) - (snd (fst (bounds a)))
 
 row num (TTbl a) = [a!(num,i) | i <- [0..columns(TTbl a)]]
 
 col num (TTbl a) = [a!(i,num) | i <- [0..rows(TTbl a)]]
+
+matMult (TTbl x) (TTbl y)  = array ((0,0) (rows(x), cols(y))) [((i,j), (arraymult (row 1 x), (col 1 y)) | i <- [0..((rows x) -1)], j <- [0..((cols x) -1)]]
+
+arraymult x y =
 
 		  
