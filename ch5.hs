@@ -1,10 +1,11 @@
 --5.1
-import PQueue
-import USet
-import OSet
-import MSet
-import TTable
+-- import PQueue
+-- import USet
+-- import OSet
+-- import MSet
+-- import TTable
 import Array
+import Heap
 
 data Point a = Pt (a,a) 
 	deriving Show
@@ -40,5 +41,7 @@ x = array (((0),(0)),((1),(1))) [(((0),(0)),(1)),(((0),(1)),(2)), (((1),(0)),(1)
 test7 = TTbl(x)
 test8 = array (0,3) [(0, 1),(1,2),(2,3),(3,4)]
 test9 = array (0,3) [(0, 1),(1,2),(2,3),(3,4)]
+test10 = [1,2,3]
+test11 = [1,2,3]
 
 

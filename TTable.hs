@@ -1,4 +1,4 @@
-module TTable(TTable(..), newTTable, findTTable, inTTable, rows, columns, row, col, matMult) where 
+module TTable(TTable(..), newTTable, findTTable, inTTable, rows, columns, row, col, matMult, arraymult) where 
 import Array
 		
 data TTable a b = TTbl (Array b a)
@@ -13,7 +13,7 @@ findTTable (TTbl a) i = a ! i
 
 updTable p@(i,x) (TTbl a) = TTbl (a // [p]) 
 
---not done
+
 inTTable p@(i,x) (TTbl a) |not (i >= minfirst)   = False
                          |not (i <= maxfirst)   = False
                          |not (x >= minsecond)  = False
@@ -35,8 +35,10 @@ row num (TTbl a) = [a!(num,i) | i <- [0..columns(TTbl a)]]
 
 col num (TTbl a) = [a!(i,num) | i <- [0..rows(TTbl a)]]
 
-matMult (TTbl x) (TTbl y)  = array ((0,0) (rows(x), cols(y))) [((i,j), (arraymult (row 1 x), (col 1 y)) | i <- [0..((rows x) -1)], j <- [0..((cols x) -1)]]
+matMult (TTbl x) (TTbl y)  = array ((0,0), (rows(TTbl x), columns(TTbl y))) [((i,j), (arraymult (row i (TTbl x)) (col j (TTbl y)))) | i <- [0..(rows (TTbl x))], j <- [0..(columns (TTbl x))]]
 
-arraymult x y =
+arraymult x y = sum([ x!!i * y!!i | i <- [0..((length x) - 1)]])
+
+
 
 		  
