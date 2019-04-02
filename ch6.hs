@@ -39,11 +39,25 @@ bubblesort''' (x) = (x)
 --6.5
 qsort n [] = []
 qsort n (pivot:rest) 
-	|(length rest) <= n = (isort rest)
-	|otherwise = 
-		qsort lower ++ [pivot] ++ qsort upper
+	|(length (pivot:rest)) <=  n = reverse(isort (pivot:rest))
+	|otherwise      =  (qsort  n lower) ++ [pivot] ++ (qsort n upper)
 		where 
-			lower = [x | x <- rest, x <= pivot]
-			upper = [x | x <- rest, x  > pivot]
+			  lower = [x | x <- rest, x < pivot]
+			  upper = [x | x <- rest, x  >= pivot]
+			  
+--6.6
+--drop the object of pivot from list write function to do that 
+qsort' s =
+	(qsort' lower) ++ [(pivotfinder s)] ++ (qsort' upper)
+		where 
+			  lower = [x | x <- (removeIndex s (div (length s) 2)), x < (pivotfinder s)]
+			  upper = [x | x <- (removeIndex s (div (length s) 2)), x  >= (pivotfinder s)]
+			  
+pivotfinder s = 
+	s !! (div (length s) 2)
+	
+removeIndex xs n = fst x ++ snd x
+    where x = (take (n-1) xs, drop n xs)
+    
 		
 
