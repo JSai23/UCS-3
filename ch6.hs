@@ -46,7 +46,8 @@ qsort n (pivot:rest)
 			  upper = [x | x <- rest, x  >= pivot]
 			  
 --6.6
---drop the object of pivot from list write function to do that 
+--done
+qsort' [] = []
 qsort' s =
 	(qsort' lower) ++ [(pivotfinder s)] ++ (qsort' upper)
 		where 
@@ -56,8 +57,7 @@ qsort' s =
 pivotfinder s = 
 	s !! (div (length s) 2)
 	
-removeIndex xs n = fst x ++ snd x
-    where x = (take (n-1) xs, drop n xs)
+removeIndex xs n = take n xs ++ drop (1 + n) xs
     
 		
 
