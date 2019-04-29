@@ -1,3 +1,4 @@
+import Heap
 --6.1 
 isort [] =[]
 isort (x:xs) = insert x (isort xs)
@@ -58,6 +59,43 @@ pivotfinder s =
 	s !! (div (length s) 2)
 	
 removeIndex xs n = take n xs ++ drop (1 + n) xs
-    
+
+--6.7
+--if otherwise counts as a step then this question can be done if not the efficiencey for all lists of the same meaning there is no worst case list
+--[8,7,6,5,4,3,2,1]
+
+
+
+--6.8 
+merge' [] b     = b 
+merge'  a []    = a
+merge' a@(x:xs) b@(y:ys)
+	| (x<=y)     = x : (merge' xs b)
+	| otherwise  = y : (merge' a ys) 
+
+
+msort [] = []
+msort [x]  = [x]
+msort xs   = merge' (merge' (msort xs1) (msort xs2)) (msort xs3)
+	where 
+		xs1 = take k xs
+		xs2 = drop k (take (2 * k) xs)
+		xs3 = drop (2 * k) xs
+		k   = ((length xs) `div` 3) +1
+
+
+test12 = [1,2,3]
+
+--6.9 
+--from eimacs converts
+listToHeap xs = foldr insHeap EmptyHP xs
+
+test69 = [23,63,21,15,64,96,66,52,20,33,90,19]
+
+{-
+ -
+HP 15 3 (HP 19 2 (HP 20 2 (HP 33 1 EmptyHP EmptyHP) (HP 52 1 EmptyHP EmptyHP)) (HP 64 1 (HP 66 2 (HP 90 1 EmptyHP EmptyHP) (HP 96 1 EmptyHP EmptyHP)) EmptyHP)) (HP 21 2 (HP 63 1 EmptyHP EmptyHP) (HP 23 1 EmptyHP EmptyHP)) 
+
+-}   
 		
 
