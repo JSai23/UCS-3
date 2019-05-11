@@ -1,4 +1,5 @@
 import Heap
+import Array
 --6.1 
 isort [] =[]
 isort (x:xs) = insert x (isort xs)
@@ -61,9 +62,10 @@ pivotfinder s =
 removeIndex xs n = take n xs ++ drop (1 + n) xs
 
 --6.7
---if otherwise counts as a step then this question can be done if not the efficiencey for all lists of the same meaning there is no worst case list
---[8,7,6,5,4,3,2,1]
-
+--otherwise doesn't count as a step
+--it is based on the number of comparisons u make
+--comparisons stop when 1 list is null
+--[1,4,5,9,3,2,6,8]
 
 
 --6.8 
@@ -96,6 +98,42 @@ test69 = [23,63,21,15,64,96,66,52,20,33,90,19]
  -
 HP 15 3 (HP 19 2 (HP 20 2 (HP 33 1 EmptyHP EmptyHP) (HP 52 1 EmptyHP EmptyHP)) (HP 64 1 (HP 66 2 (HP 90 1 EmptyHP EmptyHP) (HP 96 1 EmptyHP EmptyHP)) EmptyHP)) (HP 21 2 (HP 63 1 EmptyHP EmptyHP) (HP 23 1 EmptyHP EmptyHP)) 
 
--}   
-		
+-}
+
+--6.10
+--use buildTree' definition from 5.7 which takes sorted lists only this makes treesort the most efficient 
+--[1,2,3,4,5,6,7]
+--14 steps in buildtree 
+--inorder 15 steps->for the empty sub tree of the ordered tree  
+--29 steps in all
+
+
+--6.11
+--skip I think 
+--
+--6.12
+qsort'' []	     = []
+qsort'' (pivot:rest) = qsort'' lower ++ [pivot] ++ qsort'' upper
+		       where lower = [x | x <- rest, x<=pivot]
+			     upper = [x | x <- rest, x >pivot]
+
+split bnds xs = accumArray f [] bnds [(x!!0, x) | x <- xs]
+	        where f xs key = xs ++ [key]
+
+bsort bnds xs = concat (map qsort'' (elems (split bnds xs)))
+
+list15 = [[2,3,2], [2,3,1], [4,2,8], [1,1,1], [2,1,3], [8,2,1], [7,9,7], [3,9,8], [5,2,1]]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
