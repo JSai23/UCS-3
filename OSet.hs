@@ -13,7 +13,10 @@ emptySet = OSt []
 setEmpty (OSt []) = True
 setEmpty _ = False
 
-inOSet x (OSt s) = elem x (takeWhile (<= x) s) 
+inOSet x (OSt (y: [])) = (x==y)
+inOSet x (OSt (y:xs))  | (x==y) = true
+		       | otherwise = inOSet x xs
+			
 
 addOSet x (OSt s) = OSt (add x s) 
    where add x [] = [x]

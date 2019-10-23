@@ -9,7 +9,7 @@ unionMSet :: Ord a => MSet a -> MSet a -> MSet a
 interMSet :: Ord a => MSet a -> MSet a -> MSet a
 --}
 
-data MSet a = MSt[a]
+data MSet a = MSt[(x,y)]
 	deriving Show
 
 emptyMSet = MSt []

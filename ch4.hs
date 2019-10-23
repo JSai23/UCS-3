@@ -3,7 +3,7 @@ concat1 xs = foldr (++) [] xs
 concat2 xs = foldl (++) [] xs
 -- time efficiency in bigO is wrong 
 -- O(n) 
--- n = length xs 
+-- n = sum of the lengths of all the lists within the list 
 
 --4.2
 --original 
@@ -40,7 +40,7 @@ data BinTree a = Empty | NodeBT a (BinTree a) (BinTree a)
 treecompare Empty Empty = True 
 treecompare Empty (NodeBT v lf rt) = False
 treecompare (NodeBT v lf rt) Empty = False 
-treecompare (NodeBT v1 lf1 rt1) (NodeBT v2 lf2 rt2) = (((v1==v2) && (treecompare lf1 lf2)) && (treecompare rt1 rt2))
+treecompare (NodeBT v1 lf1 rt1) (NodeBT v2 lf2 rt2) = ((depth  (NodeBT v1 lf1 rt1)) == (depth (NodeBT v2 lf2 rt2))) && (treecompare lf lf1) && (treecompare rt rt1)
 
 a1 = (NodeBT 3 (NodeBT 2 (NodeBT 3 Empty Empty) (NodeBT 1 Empty Empty)) (NodeBT 2 (NodeBT 1 Empty Empty) (NodeBT 1 Empty Empty)))
 a2 = (NodeBT 3 (NodeBT 2 (NodeBT 1 Empty Empty) (NodeBT 1 Empty Empty)) (NodeBT 2 (NodeBT 1 Empty Empty) (NodeBT 1 Empty Empty)))
